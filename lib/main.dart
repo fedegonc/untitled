@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('El botón de abajo sirve para incrementar algo:'),
+                  const Text('El botón de abajo sirve para incrementar lago:'),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headlineMedium,
