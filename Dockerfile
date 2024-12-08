@@ -1,11 +1,27 @@
-# Usa una imagen ligera de Nginx
+# Use a lightweight Flutter image to build the web application
+FROM google/flutter AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the entire project into the container
+COPY . .
+
+# Enable Flutter Web
+RUN flutter config --enable-web
+
+# Get dependencies and build the Flutter Web application
+RUN flutter pub get
+RUN flutter build web
+
+# Use a lightweight Nginx image to serve the Flutter Web application
 FROM nginx:alpine
 
-# Copia los archivos de la carpeta build/web a la carpeta estándar de Nginx
-COPY build/web /usr/share/nginx/html
+# Copy the built Flutter Web files to the Nginx html directory
+COPY --from=builder /app/build/web /usr/share/nginx/html
 
-# Exponer el puerto 80 para el tráfico HTTP
+# Expose port 80 to serve the application
 EXPOSE 80
 
-# Iniciar Nginx
+# Start the Nginx server
 CMD ["nginx", "-g", "daemon off;"]
