@@ -2,23 +2,18 @@ import 'package:flutter/material.dart';
 import '../components/custom_slider1.dart';
 import '../components/custom_slider2.dart';
 import '../components/TextInputCounter.dart';
+import '../components/ValueCalculator.dart';
+import '../components/responsive_container.dart';
 
-// Widget reutilizable para los contenedores
-class ResponsiveContainer extends StatelessWidget {
-  final Widget child;
 
-  const ResponsiveContainer({Key? key, required this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.8, // 80% del ancho de la pantalla
-      child: child,
-    );
-  }
-}
 
 class HomeScreen extends StatelessWidget {
+  final ValueNotifier<int> textLength = ValueNotifier<int>(0);
+  final ValueNotifier<double> slider1Value = ValueNotifier<double>(100);
+  final ValueNotifier<double> slider2Value = ValueNotifier<double>(30);
+
+  HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +26,57 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const ResponsiveContainer(child: TextInputCounter()),
+              // Entrada de texto
+              ResponsiveContainer(
+                child: TextInputCounter(
+                  onTextChanged: (text) {
+                    textLength.value = text.length; // Actualiza el contador de letras
+                  },
+                ),
+              ),
               const SizedBox(height: 40),
-              const ResponsiveContainer(child: CustomSlider1()),
+
+              // Primer slider
+              ResponsiveContainer(
+                child: CustomSlider1(
+                  onValueChanged: (value) {
+                    slider1Value.value = value; // Actualiza el valor del slider 1
+                  },
+                ),
+              ),
               const SizedBox(height: 40),
-              const ResponsiveContainer(child: CustomSlider2()),
+
+              // Segundo slider
+              ResponsiveContainer(
+                child: CustomSlider2(
+                  onValueChanged: (value) {
+                    slider2Value.value = value; // Actualiza el valor del slider 2
+                  },
+                ),
+              ),
+              const SizedBox(height: 40),
+
+              // Calculadora reactiva de valores
+              ValueListenableBuilder(
+                valueListenable: textLength,
+                builder: (context, int textLen, _) {
+                  return ValueListenableBuilder(
+                    valueListenable: slider1Value,
+                    builder: (context, double slider1, _) {
+                      return ValueListenableBuilder(
+                        valueListenable: slider2Value,
+                        builder: (context, double slider2, _) {
+                          return ValueCalculator(
+                            slider1Value: slider1,
+                            slider2Value: slider2,
+                            textLength: textLen,
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
