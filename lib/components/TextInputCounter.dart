@@ -20,16 +20,20 @@ class TextInputCounter extends StatelessWidget {
             onTextChanged?.call(text);
           },
           style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 2.0), // Borde blanco al enfocar
             ),
             hintText: 'Escribe algo aquí...',
-            hintStyle: TextStyle(color: Colors.white70),
+            hintStyle: const TextStyle(color: Colors.white70),
           ),
+          cursorColor: Colors.white, // Color del cursor
         ),
       ],
     );
