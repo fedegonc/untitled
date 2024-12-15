@@ -10,12 +10,11 @@ class CustomSlider1 extends StatefulWidget {
 }
 
 class _CustomSlider1State extends State<CustomSlider1> {
-  double _sliderValue = 100; // Valor inicial del slider.
+  double _sliderValue = 100;
 
-  // Definir directamente los valores en el componente
-  final double _min = 30; // Mínimo del slider
-  final double _max = 150; // Máximo del slider
-  final int _divisions = 12; // Incrementos del slider (de 10 en 10).
+  final double _min = 30;
+  final double _max = 150;
+  final int _divisions = 12;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class _CustomSlider1State extends State<CustomSlider1> {
       children: [
         Text(
           'Largo: ${_sliderValue.toInt()} cm',
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18, color: Colors.white),
         ),
         const SizedBox(height: 20),
         Slider(
@@ -31,11 +30,13 @@ class _CustomSlider1State extends State<CustomSlider1> {
           min: _min,
           max: _max,
           divisions: _divisions,
+          activeColor: Colors.white,
+          inactiveColor: Colors.white.withOpacity(0.5),
           label: _sliderValue.toInt().toString(),
           onChanged: (double newValue) {
             setState(() {
-              _sliderValue = newValue; // Actualiza el valor del slider.
-              widget.onValueChanged?.call(_sliderValue); // Notifica cambios
+              _sliderValue = newValue;
+              widget.onValueChanged?.call(_sliderValue);
             });
           },
         ),

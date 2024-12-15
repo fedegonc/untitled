@@ -16,17 +16,22 @@ class _CustomSlider2State extends State<CustomSlider2> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Alto: ${_sliderValue.toInt()} cm', style: const TextStyle(fontSize: 18)),
+        Text(
+          'Alto: ${_sliderValue.toInt()} cm',
+          style: const TextStyle(fontSize: 18, color: Colors.white),
+        ),
         Slider(
           value: _sliderValue,
           min: 17,
           max: 33,
           divisions: 6,
+          activeColor: Colors.white,
+          inactiveColor: Colors.white.withOpacity(0.5),
           label: _sliderValue.toInt().toString(),
           onChanged: (value) {
             setState(() {
               _sliderValue = value;
-              widget.onValueChanged?.call(value); // Notifica cambios
+              widget.onValueChanged?.call(value);
             });
           },
         ),

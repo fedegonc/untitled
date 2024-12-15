@@ -12,16 +12,23 @@ class TextInputCounter extends StatelessWidget {
       children: [
         const Text(
           'Ingrese el texto:',
-          style: TextStyle(fontSize: 18),
+          style: TextStyle(fontSize: 18, color: Colors.white),
         ),
         const SizedBox(height: 8),
         TextField(
           onChanged: (text) {
-            onTextChanged?.call(text); // Notifica cambios
+            onTextChanged?.call(text);
           },
+          style: const TextStyle(color: Colors.white),
           decoration: const InputDecoration(
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
             hintText: 'Escribe algo aquí...',
+            hintStyle: TextStyle(color: Colors.white70),
           ),
         ),
       ],
