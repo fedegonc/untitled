@@ -8,7 +8,7 @@ class CustomBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black87, // Fondo negro/oscuro por defecto
+      color: const Color(0xFF001B10), // Verde muy oscuro con predominancia de negro
       child: child,
     );
   }

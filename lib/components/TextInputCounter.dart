@@ -10,11 +10,24 @@ class TextInputCounter extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Texto explicativo
+        const Padding(
+          padding: EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            'Escribe el texto que deseas tallar. El largo del texto influirá en el tamaño final y en el costo de la pieza.',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white70,
+            ),
+          ),
+        ),
+        // Etiqueta principal
         const Text(
           'Ingrese el texto:',
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),
         const SizedBox(height: 8),
+        // Campo de entrada de texto
         TextField(
           onChanged: (text) {
             onTextChanged?.call(text);
@@ -28,12 +41,12 @@ class TextInputCounter extends StatelessWidget {
               borderSide: BorderSide(color: Colors.white),
             ),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 2.0), // Borde blanco al enfocar
+              borderSide: BorderSide(color: Colors.white, width: 2.0),
             ),
-            hintText: 'Escribe algo aquí...',
+            hintText: 'Escribe la frase aquí...',
             hintStyle: const TextStyle(color: Colors.white70),
           ),
-          cursorColor: Colors.white, // Color del cursor
+          cursorColor: Colors.white,
         ),
       ],
     );

@@ -19,12 +19,31 @@ class _CustomSlider1State extends State<CustomSlider1> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // Alinea los elementos a la izquierda
       children: [
+        // Texto Explicativo
+        const Padding(
+          padding: EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            'Selecciona el largo del tallado (en centímetros).',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white70,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ),
+        // Texto con el valor actual
         Text(
           'Largo: ${_sliderValue.toInt()} cm',
-          style: const TextStyle(fontSize: 18, color: Colors.white),
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+          ),
+          textAlign: TextAlign.left,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 8),
+        // Slider
         Slider(
           value: _sliderValue,
           min: _min,
